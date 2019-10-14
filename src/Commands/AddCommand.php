@@ -4,8 +4,10 @@ namespace Jakmall\Recruitment\Calculator\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Jakmall\Recruitment\Calculator\Traits\Result;
 
 class AddCommand extends Command{
+  use Result;
 
   protected $name = 'add';
 
@@ -22,20 +24,20 @@ class AddCommand extends Command{
   public function handle(){
     $numbers = $this->argument('numbers');
 
-    $result = '';
+    $this->setOperator('+');
+    $total = $this->calculate($numbers);
+
+    echo $this->getDescriptionResult($numbers, $total);
+  }
+
+  public function calculate($numbers){
     $total = 0;
-    $lastNumber = end($numbers);
 
     foreach($numbers as $number){
       $total += $number;
-      
-      if($number == $lastNumber){
-        echo $result .= $number . ' = ' . $total;
-      }else{
-        $result .= $number . ' + ';
-      }
-
     }
+
+    return $total;
   }
 
 }
