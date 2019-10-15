@@ -4,10 +4,11 @@ namespace Jakmall\Recruitment\Calculator\Commands;
 
 use Jakmall\Recruitment\Calculator\Traits\Result;
 use Illuminate\Console\Command;
+use Jakmall\Recruitment\Calculator\Traits\History;
 use Symfony\Component\Console\Input\InputArgument;
 
 class SubtractCommand extends Command{
-  use Result;
+  use Result, History;
 
   protected $name = 'subtract';
 
@@ -26,8 +27,19 @@ class SubtractCommand extends Command{
 
     $this->setOperator('-');
     $total = $this->calculate($numbers);
+    $desc  = $this->getDescriptionResult($numbers, $total);
 
-    echo $this->getDescriptionResult($numbers, $total);
+    $data = [
+      'Command' => 'Pow', 
+      'Description' => $this->generateDescription(), 
+      'Total' => $total, 
+      'Output' => $desc, 
+      'Time' => date('Y-m-d H:i:s')
+    ];
+
+    $this->initiate($data);
+
+    echo $desc;
   }
 
   public function calculate($numbers){
