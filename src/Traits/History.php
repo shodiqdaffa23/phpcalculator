@@ -18,8 +18,8 @@ trait History{
       $dataArray = [];
 
       $i = 1;
-
-      if(count($commands) <0){
+      
+      if(empty($commands)){
         foreach($datas as $data){
           $dataArray[] = [
             $i,
