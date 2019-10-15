@@ -30,7 +30,7 @@ class SubtractCommand extends Command{
     $desc  = $this->getDescriptionResult($numbers, $total);
 
     $data = [
-      'Command' => 'Pow', 
+      'Command' => 'Subtract', 
       'Description' => $this->generateDescription(), 
       'Total' => $total, 
       'Output' => $desc, 
