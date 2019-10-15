@@ -16,14 +16,17 @@ trait Result{
     $this->operator = $operator;
   }
 
+  public function generateDescription(){
+    return $desc = implode($this->getOperator(), $this->numbers);
+  }
+
   public function getDescriptionResult(Array $numbers, $total){
     $this->numbers = $numbers;
 
-    $desc = implode($this->getOperator(), $numbers);
 
-    $desc .= ' = ' . $total;
+    $descResult = $this->generateDescription(). ' = ' . $total;
 
-    return $desc;
+    return $descResult;
   }
 
 }
